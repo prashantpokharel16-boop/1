@@ -8,15 +8,15 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
-        // FORCED LOGIN GUARD
+        // FORCED SECURITY LOGIN GUARD
         if (localStorage.getItem("isLoggedIn") !== "true") {
-            window.location.href = "auth.html";
+            window.location.replace("auth.html");
         }
     </script>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR AREA -->
     <header class="navbar">
         <div class="logo">
             <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
@@ -30,16 +30,15 @@
             <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn"><i class="fa-solid fa-circle-user"></i> Profile</button>
         </nav>
         <div class="nav-auth-buttons">
-            <!-- Dynamic Username Token -->
             <span id="nav-username-display" class="user-pill"><i class="fa-solid fa-user-tag"></i> Loading...</span>
             <button onclick="logoutUser()" class="btn btn-outline" style="cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
         </div>
     </header>
 
-    <!-- MAIN VIEWS CONTAINER -->
+    <!-- CONTENT PAGES CONTAINER -->
     <main class="container">
 
-        <!-- ================= HOME SLIDE ================= -->
+        <!-- ================= HOME VIEW SLIDE ================= -->
         <div id="slide-home" class="page-slide active">
             <div class="layout-grid-home">
                 <section class="hero">
@@ -68,7 +67,7 @@
             </div>
         </div>
 
-        <!-- ================= ABOUT SLIDE ================= -->
+        <!-- ================= ABOUT VIEW SLIDE ================= -->
         <div id="slide-about" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -86,13 +85,13 @@
                     <div class="about-block">
                         <div class="about-icon-pill"><i class="fa-solid fa-right-left"></i></div>
                         <h3>What We Do In Trading</h3>
-                        <p>When two individuals want to exchange items, cash, keys, or profile accounts, they open a secure desk ticket with us. The seller hands the asset securely to our certified middlemen. We run verification sweeps on the asset. Once the buyer completes their external financial transfer to the seller, we immediately override properties and release the trade parameters. **No exit scams. No fake invoices. Absolute safety.**</p>
+                        <p>When two individuals want to exchange items, cash, keys, or profile accounts, they open a secure desk ticket with us. The seller hands the asset securely to our certified middlemen. We run verification sweeps on the asset. Once the buyer completes their external financial transfer to the seller, we immediately override properties and release the trade parameters. No exit scams. No fake invoices. Absolute safety.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= FEATURES SLIDE ================= -->
+        <!-- ================= FEATURES VIEW SLIDE ================= -->
         <div id="slide-features" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -121,7 +120,7 @@
             </div>
         </div>
 
-        <!-- ================= TEAM SLIDE ================= -->
+        <!-- ================= TEAM VIEW SLIDE ================= -->
         <div id="slide-team" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -147,7 +146,7 @@
             </div>
         </div>
 
-        <!-- ================= REVIEWS SLIDE (WITH DYNAMIC INPUT) ================= -->
+        <!-- ================= REVIEWS VIEW SLIDE ================= -->
         <div id="slide-reviews" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -156,7 +155,7 @@
                 </div>
                 <hr class="divider">
                 
-                <!-- PUBLIC SUBMISSION INTERFACE BOX -->
+                <!-- PUBLIC REVIEW SUBMISSION FORM BOX -->
                 <div class="review-submission-box">
                     <h3>Submit Your Public Record Review</h3>
                     <form id="public-review-form" onsubmit="submitLiveReview(event)">
@@ -174,28 +173,27 @@
                         </div>
                         <div class="sub-group" style="margin-top: 15px;">
                             <label>Your Review Statement</label>
-                            <textarea id="review-text-input" class="premium-textarea" placeholder="Type out your transaction log or feedback here... Everyone on the web will see this review instantly." required></textarea>
+                            <textarea id="review-text-input" class="premium-textarea" placeholder="Type out your transaction feedback here... Everyone on the web will see this review instantly." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-discord" style="margin-top: 15px; border:none; cursor:pointer;"><i class="fa-solid fa-paper-plane"></i> Publish Review To Public Grid</button>
                     </form>
                 </div>
 
-                <!-- TARGET MOUNT CONTAINER FOR LIVE REVIEWS -->
+                <!-- LIVE FEED DESTINATION TARGET -->
                 <div id="dynamic-reviews-grid" class="reviews-grid-premium">
-                    <!-- Default Hardcoded Reviews (Fallback placeholders) -->
                     <div class="review-box-p">
                         <div class="r-top">
                             <span class="r-user"><i class="fa-solid fa-circle-user"></i> AlphaX</span>
                             <span class="r-stars">⭐⭐⭐⭐⭐</span>
                         </div>
-                        <p>"Incredibly efficient trading infrastructure. Handled a high-value account transfer through their ticket desk. Safe middleman and highly helpful crew members."</p>
+                        <p>"Incredibly efficient trading infrastructure. Handled a high-value account transfer through their ticket desk. Safe middleman."</p>
                         <span class="r-date"><i class="fa-solid fa-clock"></i> Verified Deal Done Successfully</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PROFILE SLIDE (NEW) ================= -->
+        <!-- ================= PROFILE VIEW SLIDE ================= -->
         <div id="slide-profile" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -219,23 +217,20 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER ARCHITECTURE -->
     <footer>
         <p>&copy; 2026 G2G Marketplace. All Rights Reserved.</p>
-        <p>Dynamic Data Storage Connected.</p>
+        <p>Dynamic Core Storage Framework Connected.</p>
     </footer>
 
-    <!-- INTERACTIVE CONTROL ACTIONS -->
+    <!-- INTERACTIVE CONTROL SCRIPT MATRIX -->
     <script>
-        // Track the actively logged-in identity
         const currentUser = localStorage.getItem("activeSessionUser");
         
-        // Inject user identity metrics everywhere across views on execution loop
         if(currentUser) {
             document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-astronaut"></i> ${currentUser}`;
             document.getElementById("profile-username-val").innerText = currentUser;
             
-            // Extract profile metrics from localStorage registry records
             const storedEmail = localStorage.getItem("email_" + currentUser) || "hidden_user@g2g.marketplace";
             const storedDiscord = localStorage.getItem("discord_" + currentUser) || "Not Linked In Settings";
             
@@ -257,11 +252,10 @@
             if(activeNav) activeNav.classList.add('active');
         }
 
-        // --- PUBLIC REVIEW ENGINE LOGIC ---
+        // --- PUBLIC COMMENT DATA ENGINE ---
         function loadReviewsFromStorage() {
             const reviewContainer = document.getElementById("dynamic-reviews-grid");
             
-            // Base structural presets
             let defaultHTML = `
                 <div class="review-box-p">
                     <div class="r-top">
@@ -281,10 +275,8 @@
                 </div>
             `;
 
-            // Pull dynamic array strings from active global storage
             let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
             
-            // Loop and add comments matching layout matrix format
             globalReviews.forEach(rev => {
                 defaultHTML = `
                     <div class="review-box-p custom-user-review">
@@ -295,7 +287,7 @@
                         <p>"${rev.text}"</p>
                         <span class="r-date"><i class="fa-solid fa-circle-nodes"></i> Live Public Contribution</span>
                     </div>
-                ` + defaultHTML; // Prepends fresh submissions onto the top of the stack grid
+                ` + defaultHTML;
             });
 
             reviewContainer.innerHTML = defaultHTML;
@@ -310,7 +302,6 @@
 
             let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
             
-            // Create a structured data entity packet
             const newReviewPacket = {
                 author: currentUser || "AnonymousTrader",
                 stars: starsSelection,
@@ -320,18 +311,19 @@
             globalReviews.push(newReviewPacket);
             localStorage.setItem("publicReviewsArray", JSON.stringify(globalReviews));
             
-            // Reset input values and run structural redraw loop
             document.getElementById("review-text-input").value = "";
             loadReviewsFromStorage();
         }
 
-        // Fire loading cycle to populate public reviews grid on interface activation
+        // Initialize user data parsing on setup loop
         loadReviewsFromStorage();
 
+        // FIXED SECURITY LOGOUT LOGIC PIPELINE
         function logoutUser() {
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("activeSessionUser");
-            window.location.href = "auth.html";
+            alert("Logging out securely...");
+            window.location.replace("auth.html");
         }
     </script>
 </body>
